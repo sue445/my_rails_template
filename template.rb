@@ -1,5 +1,5 @@
-#REPO_URL = "~/workspace/rails/my_rails_template"
-REPO_URL = "https://raw.github.com/sue445/my_rails_template/master"
+REPO_URL = "~/workspace/rails/my_rails_template"
+#REPO_URL = "https://raw.github.com/sue445/my_rails_template/master"
 
 def copy_from_repo(path)
   get "#{REPO_URL}/#{path}", path
@@ -24,13 +24,6 @@ gem_group :test, :development do
   gem "spork-rails", "~> 3.2.1"
 
   gem "database_cleaner"
-end
-
-label "Jenkins CI"
-gem_group :test do
-  gem "simplecov", :require => false
-  gem "simplecov-rcov", :require => false
-  gem "rails_best_practices", "~> 1.11.1"
 end
 
 label "guard"
@@ -64,6 +57,21 @@ end
   EOS
 end
 
+if yes? "Would you like to install Jenkins CI tools?"
+  label "Jenkins CI"
+  gem_group :test do
+    gem "simplecov", :require => false
+    gem "simplecov-rcov", :require => false
+    gem "rails_best_practices", "~> 1.11.1"
+  end
+
+  copy_from_repo "script/build_for_jenkins.sh"
+  copy_from_repo "script/rails_best_practices.sh"
+
+  chmod "script/build_for_jenkins.sh", 0755
+  chmod "script/rails_best_practices.sh", 0755
+end
+
 if yes? "Would you like to install capistrano?"
   label "Deploy with Capistrano"
   gem_group :development do
@@ -92,11 +100,7 @@ remove_file "test/"
 
 copy_from_repo "spec/spec_helper.rb"
 copy_from_repo ".rspec"
-copy_from_repo "script/build_for_jenkins.sh"
-copy_from_repo "script/rails_best_practices.sh"
 
-chmod "script/build_for_jenkins.sh", 0755
-chmod "script/rails_best_practices.sh", 0755
 
 append_to_file ".gitignore" do
   <<-EOS
@@ -105,9 +109,10 @@ append_to_file ".gitignore" do
   EOS
 end
 
-run "bundle install --path vendor/bundle"
-#run "bundle install"
+#run "bundle install --path vendor/bundle"
+run "bundle install"
 
 run "bundle exec guard init"
 
 run "bundle exec rails generate bootstrap:install less" if is_use_bootstrap
+
