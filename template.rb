@@ -129,7 +129,7 @@ if gems[:bootstrap]
     generate 'bootstrap:layout application fluid -f'
   end
 
-  gsub_file "app/views/layouts/application.html.haml", /lang="en"/, %(lang="ja")
+  #gsub_file "app/views/layouts/application.html.haml", /lang="en"/, %(lang="ja")
 end
 
 run "bundle install --path vendor/bundle"
