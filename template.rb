@@ -1,5 +1,7 @@
-REPO_URL = "~/workspace/rails/my_rails_template"
-#REPO_URL = "https://raw.github.com/sue445/my_rails_template/master"
+#REPO_URL = "~/workspace/rails/my_rails_template"
+REPO_URL = "https://raw.github.com/sue445/my_rails_template/master"
+
+gems = {}
 
 def copy_from_repo(path)
   get "#{REPO_URL}/#{path}", path
@@ -73,6 +75,8 @@ if yes? "Would you like to install Jenkins CI tools?"
 end
 
 if yes? "Would you like to install capistrano?"
+  capify!
+
   label "Deploy with Capistrano"
   gem_group :development do
     gem "capistrano"
@@ -82,12 +86,13 @@ if yes? "Would you like to install capistrano?"
   end
 end
 
-is_use_bootstrap = yes? "Would you like to install twitter-bootstrap-rails?"
+gems[:bootstrap] = yes? "Would you like to install twitter-bootstrap-rails?"
 
-if is_use_bootstrap
+if gems[:bootstrap]
   label "twitter-bootstrap-rails"
 
   gem_group :assets do
+    gem "less-rails"
     gem "libv8", "~> 3.11.8"
     gem "twitter-bootstrap-rails", ">= 2.1.3"
     gem "therubyracer", ">= 0.10.2", :platform => :ruby
@@ -109,10 +114,32 @@ append_to_file ".gitignore" do
   EOS
 end
 
-#run "bundle install --path vendor/bundle"
-run "bundle install"
+# ref. https://github.com/tachiba/rails3_template/blob/master/app_template.rb
+
+#
+# Generators
+#
+if gems[:bootstrap]
+  generate 'bootstrap:install'
+
+  if yes?("Would you like to create FIXED layout?(yes=FIXED, no-FLUID)")
+    generate 'bootstrap:layout application fixed -f'
+  else
+    generate 'bootstrap:layout application fluid -f'
+  end
+
+  gsub_file "app/views/layouts/application.html.haml", /lang="en"/, %(lang="ja")
+end
+
+run "bundle install --path vendor/bundle"
+#run "bundle install"
 
 run "bundle exec guard init"
 
-run "bundle exec rails generate bootstrap:install less" if is_use_bootstrap
+#
+# Git
+#
+git :init
+git :add => '.'
+git :commit => '-am "Initial commit"'
 
