@@ -12,6 +12,7 @@ rails new your_project_name -m https://raw.github.com/sue445/my_rails_template/m
 * pry
 * spork
 * guard
+* ja.yml (via. https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/ja.yml )
 
 ### Optional install
 * Jenkins CI tools

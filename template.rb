@@ -106,6 +106,7 @@ remove_file "test/"
 copy_from_repo "spec/spec_helper.rb"
 copy_from_repo ".rspec"
 
+get "https://raw.github.com/svenfuchs/rails-i18n/master/rails/locale/ja.yml", "config/locales/ja.yml"
 
 append_to_file ".gitignore" do
   <<-EOS
