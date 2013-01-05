@@ -116,6 +116,9 @@ append_to_file ".gitignore" do
   EOS
 end
 
+run "bundle install --path vendor/bundle"
+#run "bundle install"
+
 # ref. https://github.com/tachiba/rails3_template/blob/master/app_template.rb
 
 #
@@ -132,9 +135,6 @@ if gems[:bootstrap]
 
   #gsub_file "app/views/layouts/application.html.haml", /lang="en"/, %(lang="ja")
 end
-
-run "bundle install --path vendor/bundle"
-#run "bundle install"
 
 run "bundle exec guard init"
 
