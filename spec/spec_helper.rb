@@ -23,11 +23,13 @@ Spork.each_run do
   # This code will be run each time you run your specs.
 
   # for Jenkins CI
-  if defined? SimpleCov
+  begin
     require 'simplecov'
     require 'simplecov-rcov'
     SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
     SimpleCov.start 'rails'
+  rescue LoadError
+    # if simplecov is not registed, do nothing
   end
 
   # This file is copied to spec/ when you run 'rails generate rspec:install'

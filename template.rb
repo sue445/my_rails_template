@@ -112,6 +112,7 @@ append_to_file ".gitignore" do
   <<-EOS
 /vendor/bundle/
 /reports/
+/coverage/
   EOS
 end
 
