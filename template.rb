@@ -1,5 +1,5 @@
-#REPO_URL = "~/workspace/rails/my_rails_template"
-REPO_URL = "https://raw.github.com/sue445/my_rails_template/master"
+REPO_URL = "~/workspace/rails/my_rails_template"
+#REPO_URL = "https://raw.github.com/sue445/my_rails_template/master"
 
 gems = {}
 
@@ -132,8 +132,8 @@ if gems[:bootstrap]
   #gsub_file "app/views/layouts/application.html.haml", /lang="en"/, %(lang="ja")
 end
 
-run "bundle install --path vendor/bundle"
-#run "bundle install"
+#run "bundle install --path vendor/bundle"
+run "bundle install"
 
 run "bundle exec guard init"
 
