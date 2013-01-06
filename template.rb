@@ -74,9 +74,9 @@ if yes? "Would you like to install Jenkins CI tools?"
   chmod "script/rails_best_practices.sh", 0755
 end
 
-if yes? "Would you like to install capistrano?"
-  capify!
+gems[:capistrano] = yes? "Would you like to install capistrano?"
 
+if gems[:capistrano]
   label "Deploy with Capistrano"
   gem_group :development do
     gem "capistrano"
@@ -118,6 +118,8 @@ end
 
 run "bundle install --path vendor/bundle"
 #run "bundle install"
+
+capify! if gems[:capistrano]
 
 # ref. https://github.com/tachiba/rails3_template/blob/master/app_template.rb
 
