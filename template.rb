@@ -108,11 +108,14 @@ copy_from_repo ".rspec"
 
 get "https://raw.github.com/svenfuchs/rails-i18n/master/rails/locale/ja.yml", "config/locales/ja.yml"
 
+# customize .gitignore
+remove_file ".gitignore"
+get "https://raw.github.com/RailsApps/rails-composer/master/files/gitignore.txt", ".gitignore"
 append_to_file ".gitignore" do
   <<-EOS
-/vendor/bundle/
 /reports/
 /coverage/
+/db/schema.rb
   EOS
 end
 
