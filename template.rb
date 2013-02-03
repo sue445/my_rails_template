@@ -65,6 +65,7 @@ if yes? "Would you like to install Jenkins CI tools?"
     gem "simplecov", :require => false
     gem "simplecov-rcov", :require => false
     gem "rails_best_practices", "~> 1.11.1"
+    gem "ci_reporter", "~> 1.8.4"
   end
 
   copy_from_repo "script/build_for_jenkins.sh"
@@ -74,6 +75,7 @@ if yes? "Would you like to install Jenkins CI tools?"
   chmod "script/rails_best_practices.sh", 0755
 
   run "cp config/database.yml config/database.yml.jenkins"
+  insert_into_file "Rakefile", "require 'ci/reporter/rake/rspec'\n", :after => "require File.expand_path('../config/application', __FILE__)\n"
 end
 
 gems[:capistrano] = yes? "Would you like to install capistrano?"
