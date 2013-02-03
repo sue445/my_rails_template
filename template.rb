@@ -72,6 +72,8 @@ if yes? "Would you like to install Jenkins CI tools?"
 
   chmod "script/build_for_jenkins.sh", 0755
   chmod "script/rails_best_practices.sh", 0755
+
+  run "cp config/database.yml config/database.yml.jenkins"
 end
 
 gems[:capistrano] = yes? "Would you like to install capistrano?"
