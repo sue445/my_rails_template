@@ -39,9 +39,9 @@ run "RAILS_ENV=${JENKINS_RAILS_ENV} bundle exec rake db:migrate"
 # if you use mysql_partitioning, use don't use "rake spec". because primary key is dropped
 #run "RAILS_ENV=${JENKINS_RAILS_ENV} bundle exec rake ci:setup:rspec spec"
 
-run "RAILS_ENV=${JENKINS_RAILS_ENV} bundle exec rspec"
-
 run "rm -rf reports"
 run "mkdir -m 777 reports/"
+
+run "RAILS_ENV=${JENKINS_RAILS_ENV} bundle exec rspec --profile > reports/rspec-console.log"
 
 exit 0
