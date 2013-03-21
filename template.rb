@@ -70,6 +70,7 @@ if yes? "Would you like to install Jenkins CI tools?"
 
   copy_from_repo "script/build_for_jenkins.sh"
   copy_from_repo "script/rails_best_practices.sh"
+  copy_from_repo "script/plot-rspec-slowest-examples.rb"
 
   chmod "script/build_for_jenkins.sh", 0755
   chmod "script/rails_best_practices.sh", 0755
