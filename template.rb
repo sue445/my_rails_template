@@ -33,27 +33,21 @@ append_to_file "Gemfile" do
   <<-EOS
 
 group :development do
-  gem "guard", ">= 0.6.2"
+  gem 'guard-rspec'
 
-  require "rbconfig"
-  HOST_OS = RbConfig::CONFIG["host_os"]
-  case HOST_OS
-    when /darwin/i
-      gem "rb-fsevent"
-      gem "growl"
-    when /linux/i
-      gem "libnotify"
-      gem "rb-inotify"
-    when /mswin|windows/i
-      gem "rb-fchange"
-      gem "win32console"
-      gem "rb-notifu"
-  end
+  # ref. https://github.com/guard/guard#efficient-filesystem-handling
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'rb-fchange', :require => false
 
-  gem "guard-bundler", ">= 0.1.3"
-  gem "guard-rails", ">= 0.0.3"
-  gem "guard-rspec", ">= 0.4.3"
-  #gem "guard-cucumber", ">= 0.6.1"
+  # Runs on Mac OS X
+  gem 'growl'
+
+  # Runs on Linux, FreeBSD, OpenBSD and Solaris
+  #gem 'libnotify'
+
+  # Runs on Windows
+  #gem 'rb-notifu'
 end
 
   EOS
