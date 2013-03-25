@@ -1,5 +1,8 @@
-#REPO_URL = "~/workspace/rails/my_rails_template"
-REPO_URL = "https://raw.github.com/sue445/my_rails_template/master"
+if ENV["LOCAL_REPO"] == "1"
+  REPO_URL = File.expand_path(File.dirname(__FILE__))
+else
+  REPO_URL = "https://raw.github.com/sue445/my_rails_template/master"
+end
 
 gems = {}
 
