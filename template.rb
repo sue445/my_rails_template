@@ -140,6 +140,7 @@ if gems[:bootstrap]
     generate 'bootstrap:layout application fluid -f'
   end
 
+  get "https://gist.github.com/sue445/5261654/raw/ja.bootstrap.yml", "config/locales/ja.bootstrap.yml"
   #gsub_file "app/views/layouts/application.html.haml", /lang="en"/, %(lang="ja")
 end
 
