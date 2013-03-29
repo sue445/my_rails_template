@@ -1,6 +1,7 @@
 #!/bin/bash
 
 readonly JENKINS_RAILS_ENV="test"
+export LANG=ja_JP.UTF-8
 
 # Jenkins build script
 
