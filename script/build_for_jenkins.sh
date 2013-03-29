@@ -37,12 +37,15 @@ fi
 run "RAILS_ENV=${JENKINS_RAILS_ENV} bundle exec rake db:create"
 run "RAILS_ENV=${JENKINS_RAILS_ENV} bundle exec rake db:migrate"
 
-# if you use mysql_partitioning, use don't use "rake spec". because primary key is dropped
-#run "RAILS_ENV=${JENKINS_RAILS_ENV} bundle exec rake ci:setup:rspec spec"
-
 run "rm -rf reports"
 run "mkdir -m 777 reports/"
 
-run "RAILS_ENV=${JENKINS_RAILS_ENV} bundle exec rspec --profile > reports/rspec-console.log"
+run "RAILS_ENV=${JENKINS_RAILS_ENV} bundle exec rspec --profile > ./reports/rspec-console.log"
+run "ruby ./script/plot-rspec-slowest-examples.rb ./reports/rspec-console.log > ./reports/rspec-plot.csv"
+
+# * if you use mysql_partitioning, use don't use `rake spec`. because primary key is dropped
+# * `rake spec` can not use --profile
+#run "RAILS_ENV=${JENKINS_RAILS_ENV} bundle exec rake ci:setup:rspec spec"
+
 
 exit 0
