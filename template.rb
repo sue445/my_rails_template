@@ -73,7 +73,7 @@ if yes? "Would you like to install Jenkins CI tools?"
   chmod "script/rails_best_practices.sh", 0755
 
   run "cp config/database.yml config/database.yml.jenkins"
-  insert_into_file "Rakefile", "require 'ci/reporter/rake/rspec'\n", :after => "require File.expand_path('../config/application', __FILE__)\n"
+  insert_into_file "Rakefile", "require 'ci/reporter/rake/rspec' if Rails.env.test?\n", :after => "require File.expand_path('../config/application', __FILE__)\n"
 end
 
 gems[:capistrano] = yes? "Would you like to install capistrano?"
