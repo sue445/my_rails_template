@@ -15,6 +15,15 @@ def label(str)
   append_to_file "Gemfile", "\n# #{str}"
 end
 
+gem "slim-rails"
+
+label "dev tool"
+gem_group :test, :development do
+  gem 'annotate', ">=2.5.0", require: false
+  gem "better_errors"
+  gem "binding_of_caller"
+end
+
 label "testing"
 gem_group :test, :development do
   gem "rspec-rails", "~> 2.12.0"
@@ -85,6 +94,8 @@ if gems[:capistrano]
     gem "capistrano-ext"
     gem "capistrano_rsync_with_remote_cache"
     gem "capistrano_colors"
+    gem "capistrano-tagging", "~> 0.1.0"
+    gem "capistrano-colorized-stream"
   end
 end
 
