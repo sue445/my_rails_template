@@ -26,16 +26,18 @@ end
 
 label "testing"
 gem_group :test, :development do
-  gem "rspec-rails", "~> 2.12.0"
+  gem "rspec-rails", github: "rspec/rspec-rails"
+  gem "rspec"      , github: "rspec/rspec"
+  gem "rspec-core" , github: "rspec/rspec-core", require: 'rspec'
   gem "factory_girl_rails", "~> 4.1.0"
-  gem "rspec-parameterized", "~> 0.0.7"
+  gem "rspec-parameterized", github: "tomykaira/rspec-parameterized"
 
   gem "pry", "~> 0.9.10"
   gem "pry-remote", "~> 0.1.6"
   gem "pry-nav", "~> 0.2.3"
   gem "pry-rails", "~> 0.2.2"
 
-  gem "spork-rails", "~> 3.2.1"
+  gem "spork-rails", github: "A-gen/spork-rails"
 
   gem "database_cleaner"
 end
