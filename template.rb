@@ -114,7 +114,6 @@ if gems[:bootstrap]
   end
 end
 
-remove_file "README.rdoc"
 remove_file "test/"
 
 
