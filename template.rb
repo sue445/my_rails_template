@@ -77,10 +77,12 @@ if yes? "Would you like to install Jenkins CI tools?"
   end
 
   copy_from_repo "script/build_for_jenkins.sh"
+  copy_from_repo "script/generate_rdoc.sh"
   copy_from_repo "script/rails_best_practices.sh"
   get "https://gist.github.com/sue445/5140150/raw/plot-rspec-slowest-examples.rb", "script/plot-rspec-slowest-examples.rb"
 
   chmod "script/build_for_jenkins.sh", 0755
+  chmod "script/generate_rdoc.sh", 0755
   chmod "script/rails_best_practices.sh", 0755
 
   run "cp config/database.yml config/database.yml.jenkins"
