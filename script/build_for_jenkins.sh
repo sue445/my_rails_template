@@ -19,6 +19,8 @@ run()
   fi
 }
 
+run "which ruby"
+run "ruby --version"
 run "cp config/database.yml.jenkins config/database.yml"
 run "gem install bundler --no-ri --no-rdoc"
 
