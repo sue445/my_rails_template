@@ -18,19 +18,18 @@ end
 gem "slim-rails"
 
 label "dev tool"
-gem_group :test, :development do
+gem_group :development do
   gem 'annotate', ">=2.5.0", require: false
   gem "better_errors"
   gem "binding_of_caller"
+  gem "view_source_map", "0.0.3"
 end
 
 label "testing"
 gem_group :test, :development do
-  gem "rspec-rails", github: "rspec/rspec-rails"
-  gem "rspec"      , github: "rspec/rspec"
-  gem "rspec-core" , github: "rspec/rspec-core", require: 'rspec'
+  gem "rspec-rails"
   gem "factory_girl_rails", "~> 4.1.0"
-  gem "rspec-parameterized", github: "tomykaira/rspec-parameterized"
+  gem "rspec-parameterized"
 
   gem "pry", "~> 0.9.10"
   gem "pry-remote", "~> 0.1.6"
