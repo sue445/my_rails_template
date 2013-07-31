@@ -149,7 +149,7 @@ capify! if gems[:capistrano]
 if gems[:bootstrap]
   generate 'bootstrap:install'
 
-  if yes?("Would you like to create FIXED layout?(yes=FIXED, no-FLUID)")
+  if yes?("Would you like to create FIXED layout?(yes=FIXED, no=FLUID)")
     generate 'bootstrap:layout application fixed -f'
   else
     generate 'bootstrap:layout application fluid -f'
