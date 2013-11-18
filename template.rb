@@ -5,6 +5,7 @@ else
 end
 
 gems = {}
+gems[:guard]      = yes? "Would you like to install guard?"
 gems[:capistrano] = yes? "Would you like to install capistrano?"
 gems[:jenkins]    = yes? "Would you like to install Jenkins CI tools?"
 
@@ -41,9 +42,10 @@ gem_group :test, :development do
   gem "database_cleaner"
 end
 
-label "guard"
-append_to_file "Gemfile" do
-  <<-EOS
+if gems[:guard]
+  label "guard"
+    append_to_file "Gemfile" do
+      <<-EOS
 
 group :development do
   gem 'guard-rspec'
@@ -54,11 +56,12 @@ group :development do
   # Runs on Linux, FreeBSD, OpenBSD and Solaris
   #gem 'libnotify'
 
-  # Runs on Windows
+ # Runs on Windows
   #gem 'rb-notifu'
 end
 
-  EOS
+    EOS
+  end
 end
 
 if gems[:jenkins]
@@ -141,7 +144,7 @@ if gems[:bootstrap]
   remove_file "app/assets/stylesheets/scaffolds.css.scss"
 end
 
-run "bundle exec guard init"
+run "bundle exec guard init" if gems[:guard]
 
 #
 # Git
