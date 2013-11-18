@@ -39,8 +39,6 @@ gem_group :test, :development do
   gem "pry-nav", "~> 0.2.3"
   gem "pry-rails", "~> 0.2.2"
 
-  gem "spork-rails", github: "A-gen/spork-rails"
-
   gem "database_cleaner"
 end
 
