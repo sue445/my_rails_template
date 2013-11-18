@@ -8,6 +8,7 @@ gems = {}
 gems[:guard]      = yes? "Would you like to install guard?"
 gems[:capistrano] = yes? "Would you like to install capistrano?"
 gems[:jenkins]    = yes? "Would you like to install Jenkins CI tools?"
+gems[:bootstrap]  = yes? "Would you like to install twitter-bootstrap-rails?"
 
 def copy_from_repo(path)
   get "#{REPO_URL}/#{path}", path
