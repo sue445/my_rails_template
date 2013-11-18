@@ -7,7 +7,6 @@ end
 gems = {}
 gems[:capistrano] = yes? "Would you like to install capistrano?"
 gems[:jenkins]    = yes? "Would you like to install Jenkins CI tools?"
-gems[:bootstrap]  = yes? "Would you like to install twitter-bootstrap-rails?"
 
 def copy_from_repo(path)
   get "#{REPO_URL}/#{path}", path
@@ -72,18 +71,14 @@ if gems[:jenkins]
   gem_group :test do
     gem "simplecov", :require => false
     gem "simplecov-rcov", :require => false
-    gem "rails_best_practices", "~> 1.11.1"
     gem "ci_reporter", "~> 1.8.4"
   end
 
   copy_from_repo "script/build_for_jenkins.sh"
   copy_from_repo "script/generate_rdoc.sh"
-  copy_from_repo "script/rails_best_practices.sh"
   get "https://gist.github.com/sue445/5140150/raw/plot-rspec-slowest-examples.rb", "script/plot-rspec-slowest-examples.rb"
 
-  chmod "script/build_for_jenkins.sh", 0755
   chmod "script/generate_rdoc.sh", 0755
-  chmod "script/rails_best_practices.sh", 0755
 
   run "cp config/database.yml config/database.yml.jenkins"
   insert_into_file "Rakefile", "require 'ci/reporter/rake/rspec' if Rails.env.test?\n", :after => "require File.expand_path('../config/application', __FILE__)\n"
