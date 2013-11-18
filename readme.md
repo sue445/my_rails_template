@@ -10,8 +10,6 @@ rails new your_project_name -m https://raw.github.com/sue445/my_rails_template/m
 * rails
 * rspec
 * pry
-* spork
-* guard
 * slim
 * .gitignore (via. https://github.com/RailsApps/rails-composer/blob/master/files/gitignore.txt )
 * ja.yml (via. https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/ja.yml )
@@ -23,5 +21,6 @@ rails new your_project_name -m https://raw.github.com/sue445/my_rails_template/m
  * rails_best_practices
  * some build scripts
 * capistrano
+* guard
 * twitter-bootstrap-rails
 
