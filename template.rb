@@ -84,7 +84,6 @@ if gems[:capistrano]
   label "Deploy with Capistrano"
   gem_group :development do
     gem "capistrano"
-    gem "capistrano-ext"
     gem "capistrano_rsync_with_remote_cache"
     gem "capistrano_colors"
     gem "capistrano-tagging", "~> 0.1.0"
