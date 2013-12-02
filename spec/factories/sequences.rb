@@ -11,6 +11,7 @@ FactoryGirl.define do
   sequence(:random_flag){ rand(10) < 5 }
   sequence(:random_str) { rand_str }
   sequence(:random_url) { "http://"+ rand_str }
+  sequence(:random_mail){ "#{rand_str}@#{rand_str}.com" }
 
   sequence(:random_time){
     diff_day = 150 - rand(365)
