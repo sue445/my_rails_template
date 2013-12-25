@@ -14,7 +14,9 @@ begin
   require 'simplecov'
   require 'simplecov-rcov'
   SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
-  SimpleCov.start 'rails'
+  SimpleCov.start :rails do
+    add_filter "/app/admin/"
+  end
 rescue LoadError
   # if simplecov is not registed, do nothing
 end
