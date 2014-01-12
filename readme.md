@@ -18,7 +18,6 @@ rails new your_project_name -m https://raw.github.com/sue445/my_rails_template/m
 * Jenkins CI tools
  * simplecov
  * ci_reporter
- * rails_best_practices
  * some build scripts
 * capistrano
 * guard

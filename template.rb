@@ -23,7 +23,7 @@ gem "slim-rails"
 
 label "dev tool"
 gem_group :development do
-  gem 'annotate', ">=2.5.0", require: false
+  gem 'annotate', ">=2.6.0", require: false
   gem "better_errors"
   gem "binding_of_caller"
   gem "view_source_map", "0.0.3"
@@ -31,16 +31,18 @@ end
 
 label "testing"
 gem_group :test, :development do
-  gem "rspec-rails"
+  gem "rspec-rails", "~> 3.0.0.beta1"
+  gem "rspec-collection_matchers", "~> 0.0.2"
+  gem "rspec-its", "1.0.0.pre"
+  gem "rspec-parameterized", github: "sue445/rspec-parameterized", branch: "rspec-3.0.0.beta1"
   gem "factory_girl_rails", "~> 4.1.0"
-  gem "rspec-parameterized"
 
-  gem "pry", "~> 0.9.10"
-  gem "pry-remote", "~> 0.1.6"
-  gem "pry-nav", "~> 0.2.3"
-  gem "pry-rails", "~> 0.2.2"
+  gem "pry"       , "~> 0.9.12.4"
+  gem "pry-remote", "~> 0.1.7"
+  gem "pry-nav"   , "~> 0.2.3"
+  gem "pry-rails" , "~> 0.3.2"
 
-  gem "database_cleaner"
+  gem "database_rewinder", "~> 0.0.2"
 end
 
 if gems[:guard]
@@ -57,7 +59,7 @@ group :development do
   # Runs on Linux, FreeBSD, OpenBSD and Solaris
   #gem 'libnotify'
 
- # Runs on Windows
+  # Runs on Windows
   #gem 'rb-notifu'
 end
 
@@ -83,11 +85,9 @@ end
 if gems[:capistrano]
   label "Deploy with Capistrano"
   gem_group :development do
-    gem "capistrano"
+    gem "capistrano", "~> 3.0.1"
+    gem 'capistrano-rails', '~> 1.1.0'
     gem "capistrano_rsync_with_remote_cache"
-    gem "capistrano_colors"
-    gem "capistrano-tagging", "~> 0.1.0"
-    gem "capistrano-colorized-stream"
   end
 end
 
@@ -97,7 +97,7 @@ if gems[:bootstrap]
 
   gem "less-rails"
   gem "libv8", "~> 3.11.8"
-  gem "twitter-bootstrap-rails", ">= 2.1.3"
+  gem "twitter-bootstrap-rails", github: "seyhunak/twitter-bootstrap-rails", branch: "bootstrap3"
   gem "therubyracer", ">= 0.10.2", :platform => :ruby
 end
 
@@ -131,16 +131,10 @@ capify! if gems[:capistrano]
 # Generators
 #
 if gems[:bootstrap]
-  generate 'bootstrap:install'
-
-  if yes? "Would you like to create FIXED layout?(yes=FIXED, no-FLUID)"
-    generate 'bootstrap:layout application fixed -f'
-  else
-    generate 'bootstrap:layout application fluid -f'
-  end
+  generate 'bootstrap:install less'
+  generate 'bootstrap:layout application'
 
   get "https://gist.github.com/sue445/5261654/raw/ja.bootstrap.yml", "config/locales/ja.bootstrap.yml"
-  #gsub_file "app/views/layouts/application.html.haml", /lang="en"/, %(lang="ja")
 
   remove_file "app/assets/stylesheets/scaffolds.css.scss"
 end
