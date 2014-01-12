@@ -106,6 +106,7 @@ copy_from_repo "spec/spec_helper.rb"
 copy_from_repo "spec/factories/sequences.rb"
 copy_from_repo "spec/models/sample_spec.rb"
 copy_from_repo ".rspec"
+copy_from_repo "lib/tasks/auto_annotate_models.rake"
 
 get "https://raw.github.com/svenfuchs/rails-i18n/master/rails/locale/ja.yml", "config/locales/ja.yml"
 
@@ -123,7 +124,7 @@ end
 run "bundle install --path vendor/bundle"
 #run "bundle install"
 
-capify! if gems[:capistrano]
+run "bundle exec cap install" if gems[:capistrano]
 
 # ref. https://github.com/tachiba/rails3_template/blob/master/app_template.rb
 
