@@ -43,6 +43,7 @@ gem_group :test, :development do
   gem "pry-rails" , "~> 0.3.2"
 
   gem "database_rewinder", "~> 0.0.2"
+  gem "delorean"
 end
 
 if gems[:guard]

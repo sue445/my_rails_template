@@ -78,6 +78,12 @@ RSpec.configure do |config|
   config.after :each do
     DatabaseRewinder.clean
   end
+
+  # Delorean
+  config.include Delorean
+  config.after(:each) do
+    back_to_the_present
+  end
 end
 
 
