@@ -36,6 +36,9 @@ if [ $RET -ne 0 ]; then
   run "bundle update"
 fi
 
+run "rm log/*.log"
+run "bundle clean"
+
 run "RAILS_ENV=${JENKINS_RAILS_ENV} bundle exec rake db:create"
 run "RAILS_ENV=${JENKINS_RAILS_ENV} bundle exec rake db:migrate"
 
