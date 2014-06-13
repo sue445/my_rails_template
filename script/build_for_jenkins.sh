@@ -1,6 +1,8 @@
 #!/bin/bash -xe
 
 readonly JENKINS_RAILS_ENV="test"
+readonly JOB_COUNT=4
+
 export LANG=ja_JP.UTF-8
 
 # Jenkins build script
@@ -11,7 +13,7 @@ gem install bundler --no-ri --no-rdoc
 
 
 #########################
-bundle install --path vendor/bundle
+bundle install --path vendor/bundle --jobs=#${JOB_COUNT}
 
 RET=$?
 if [ $RET -ne 0 ]; then
