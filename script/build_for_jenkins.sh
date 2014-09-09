@@ -13,6 +13,8 @@ gem install bundler --no-ri --no-rdoc
 
 
 #########################
+# handling bundle install error
+set +e
 bundle install --path vendor/bundle --jobs=#${JOB_COUNT}
 
 RET=$?
@@ -20,6 +22,7 @@ if [ $RET -ne 0 ]; then
   # if failed 'bundle install', run 'bundle update'
   bundle update
 fi
+set -e
 
 rm -f log/*.log
 bundle clean
